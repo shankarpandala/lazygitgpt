@@ -59,8 +59,9 @@ jobs:
           pip install build bump2version
       - name: Bump version
         run: |
-          VERSION_PART=$(echo ${{ github.event.release.tag_name }} | cut -d'.' -f3)
-          bump2version --no-tag --new-version $VERSION_PART patch
+            VERSION_PART=$(echo ${{ github.event.release.tag_name }} | cut -c 2-)
+            echo $VERSION_PART
+            bump2version --no-tag --new-version $VERSION_PART patch
       - name: Build package
         run: python -m build
       - name: Publish package
