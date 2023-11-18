@@ -1,3 +1,4 @@
+import argparse
 import unittest
 from unittest.mock import patch
 from lazygitgpt.cli import main
