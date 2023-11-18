@@ -57,10 +57,40 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install build bump2version
-      - name: Bump version to release tag
+      - name: Bump version based on commits
         run: |
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          bump2version --new-version $TAG_NAME --config-file .bumpversion.cfg
+          # Get the latest tag (assumes tags are version numbers)
+          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+
+          # Initialize flags for version parts
+          IS_MAJOR=0
+          IS_MINOR=0
+          IS_PATCH=0
+
+          # Analyze commits from LATEST_TAG to HEAD
+          for COMMIT in $(git log $LATEST_TAG..HEAD --pretty=format:"%s")
+          do
+              if [[ $COMMIT == *"[major]"* ]]; then
+                  IS_MAJOR=1
+                  break
+              elif [[ $COMMIT == *"[minor]"* ]]; then
+                  IS_MINOR=1
+              elif [[ $COMMIT == *"[patch]"* ]]; then
+                  IS_PATCH=1
+              fi
+          done
+
+          # Bump version based on commit analysis
+          if [ $IS_MAJOR -eq 1 ]; then
+              bump2version major --config-file .bumpversion.cfg
+          elif [ $IS_MINOR -eq 1 ]; then
+              bump2version minor --config-file .bumpversion.cfg
+          elif [ $IS_PATCH -eq 1 ]; then
+              bump2version patch --config-file .bumpversion.cfg
+          else
+              echo "No version bump required"
+          fi
+
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git push --follow-tags
