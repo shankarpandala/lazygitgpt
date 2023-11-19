@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import click
-from lazygitgpt.git_operations import clone_repository, checkout_branch
+from lazygitgpt.git_operations import clone_repository, checkout_branch, create_branch
 from lazygitgpt.ai_operations import generate_response
 
 @click.group()
@@ -15,11 +15,16 @@ def clone(repo_url):
     clone_repository(repo_url)
 
 @cli.command()
-@click.argument('repo_path')
 @click.argument('branch_name')
-def checkout(repo_path, branch_name):
+def checkout(branch_name):
     """Checkout a branch in a git repository"""
-    checkout_branch(repo_path, branch_name)
+    checkout_branch(branch_name)
+
+@cli.command()
+@click.argument('branch_name')
+def branch(branch_name):
+    """Checkout a branch in a git repository"""
+    create_branch(branch_name)
 
 @cli.command()
 @click.argument('input_text')

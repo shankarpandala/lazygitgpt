@@ -20,16 +20,32 @@ def clone_repository(repo_url):
     except GitCommandError as e:
         print(f"Error cloning repository: {e}")
 
-def checkout_branch(repo_path, branch_name):
+def checkout_branch(branch_name):
     """
-    Checks out a specified branch in a given repository.
+    Checks out a specified branch in the current working directory.
 
-    :param repo_path: Local path to the git repository.
     :param branch_name: Name of the branch to checkout.
     """
     try:
+        # Use the current working directory as the repository path
+        repo_path = os.getcwd()
         repo = Repo(repo_path)
         repo.git.checkout(branch_name)
         print(f"Checked out to branch {branch_name}")
     except GitCommandError as e:
         print(f"Error checking out branch: {e}")
+
+def create_branch(branch_name):
+    """
+    Creates a new branch in the current working directory.
+
+    :param branch_name: Name of the branch to create.
+    """
+    try:
+        # Use the current working directory as the repository path
+        repo_path = os.getcwd()
+        repo = Repo(repo_path)
+        repo.git.checkout('-b', branch_name)
+        print(f"Created and checked out to new branch {branch_name}")
+    except GitCommandError as e:
+        print(f"Error creating new branch: {e}")
