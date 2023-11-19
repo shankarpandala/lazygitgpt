@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import click
-from lazygitgpt.lazygitgpt.git_operations import clone_repository, checkout_branch
-from lazygitgpt.lazygitgpt.ai_operations import generate_response
+from lazygitgpt.git_operations import clone_repository, checkout_branch
+from lazygitgpt.ai_operations import generate_response
 
 @click.group()
 def cli():
