@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 # Define the package version
-version = "0.0.5-beta"
+version = "0.0.5"
 
 # Define the long description from the README file
 with open("README.md", "r", encoding="utf-8") as fh:
