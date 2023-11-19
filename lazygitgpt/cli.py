@@ -10,10 +10,9 @@ def cli():
 
 @cli.command()
 @click.argument('repo_url')
-@click.argument('destination')
-def clone(repo_url, destination):
+def clone(repo_url):
     """Clone a git repository"""
-    clone_repository(repo_url, destination)
+    clone_repository(repo_url)
 
 @cli.command()
 @click.argument('repo_path')

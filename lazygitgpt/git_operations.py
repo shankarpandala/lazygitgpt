@@ -1,13 +1,20 @@
+import os
 from git import Repo, GitCommandError
 
-def clone_repository(repo_url, destination):
+def clone_repository(repo_url):
     """
-    Clones a git repository from the given URL to the specified destination.
+    Clones a git repository from the given URL to the current working directory.
 
     :param repo_url: URL of the repository to clone.
-    :param destination: Local path where the repository should be cloned.
     """
     try:
+        # Get the name of the repository by parsing the URL
+        repo_name = os.path.basename(repo_url)
+        # If the URL ends with '.git', remove it
+        if repo_name.endswith('.git'):
+            repo_name = repo_name[:-4]
+        # Use the current working directory as the destination
+        destination = os.path.join(os.getcwd(), repo_name)
         Repo.clone_from(repo_url, destination)
         print(f"Repository cloned successfully to {destination}")
     except GitCommandError as e:
