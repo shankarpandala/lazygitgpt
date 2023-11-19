@@ -28,7 +28,7 @@ def read_repository_contents():
 
     return file_contents_dict
 
-def analyze_text_with_gpt4(prompt, sources=read_repository_contents()):
+def generate_response(prompt, sources=read_repository_contents()):
     client = openai.OpenAI()
 
     # Convert sources dictionary to a string representation
