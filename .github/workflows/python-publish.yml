@@ -66,11 +66,8 @@ jobs:
           VERSION_PART=$(echo ${{ github.event.release.tag_name }} | cut -c 2-)
           RELEASE_TYPE=$(echo $VERSION_PART | cut -d '-' -f 2)
           VERSION_NUMBER=$(echo $VERSION_PART | cut -d '-' -f 1)
-          echo $VERSION_NUMBER
-          git status
+          echo $VERSION_NUMBER-$RELEASE_TYPE
           bump2version --new-version $VERSION_NUMBER-$RELEASE_TYPE $RELEASE_TYPE setup.py .bumpversion.cfg lazygitgpt/__init__.py
-          git status
-          git commit -am "Bump version to $VERSION_NUMBER-$RELEASE_TYPE"
       - name: Build package
         run: python -m build
       - name: Publish package
