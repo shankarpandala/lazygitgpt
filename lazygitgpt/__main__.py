@@ -1,3 +1,3 @@
-from lazygitgpt.cli import main
+from lazygitgpt.cli import cli
 
-main()
+cli()

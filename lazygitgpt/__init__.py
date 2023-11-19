@@ -7,4 +7,4 @@ __version__ = "0.0.6-beta"
 __author__ = "Shankar Pandala"
 __email__ = "shankar@ssbm.ch"
 
-from .cli import main
+from .cli import cli
