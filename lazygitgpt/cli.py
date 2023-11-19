@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import click
 from lazygitgpt.git_operations import clone_repository, checkout_branch
 from lazygitgpt.ai_operations import generate_response
