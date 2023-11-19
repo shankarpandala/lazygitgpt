@@ -25,8 +25,8 @@ setup(
         "License :: OSI Approved :: MIT License",  # Replace with your choice of license
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "lazygitgpt"},  # Where to find the source code
-    packages=find_packages(where="lazygitgpt"),
+    package_dir={"": "."},  # Where to find the source code
+    packages=find_packages(),
     python_requires=">=3.6",  # Minimum version requirement of Python
     install_requires=[  # List of dependencies
         "gitpython>=3.1.0",  # Example, specify actual dependencies
@@ -34,7 +34,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "lazygitgpt=lazygitgpt.lazygitgpt.cli:main",  # Linking the CLI script
+            "lazygitgpt=lazygitgpt.cli:main",  # Linking the CLI script
         ],
     },
 )
