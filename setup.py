@@ -34,7 +34,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "lazygitgpt=lazygitgpt.cli:main",  # Linking the CLI script
+            "lazygitgpt=lazygitgpt.cli:cli",  # Linking the CLI script
         ],
     },
 )
