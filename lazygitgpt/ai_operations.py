@@ -42,7 +42,7 @@ def generate_response(prompt, sources=read_repository_contents()):
 
     # Send the prompt and sources to the API
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4-1106-preview",
         messages=messages,
     )
 
