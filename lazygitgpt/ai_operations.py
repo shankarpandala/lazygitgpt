@@ -47,9 +47,3 @@ def generate_response(prompt, sources=read_repository_contents()):
     )
 
     return response.choices[0].message.content
-
-# # Example usage
-# prompt = "Please provide insights based on the following sources."
-# sources = read_repository_contents()  # Reads files from the current directory
-# analysis_result = analyze_text_with_gpt4(prompt, sources)
-# print(analysis_result)
