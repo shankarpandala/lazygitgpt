@@ -2,6 +2,14 @@ import openai
 import os
 import json
 from tqdm import tqdm
+from langchain.llms import OpenAI
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts import PromptTemplate
+from langchain.schema import HumanMessage
+from langchain.output_parsers import OutputParser
+llm = OpenAI()
+chat_model = ChatOpenAI()
+output_parser = OutputParser()
 
 def is_text_file(filepath):
     text_file_extensions = ['.txt', '.py', '.html', '.css', '.js', '.md', '.json', '.xml']
@@ -29,21 +37,8 @@ def read_repository_contents():
     return file_contents_dict
 
 def generate_response(prompt, sources=read_repository_contents()):
-    client = openai.OpenAI()
-
-    # Convert sources dictionary to a string representation
     sources_str = json.dumps(sources, indent=4)
-
-    # Prepare the message with the prompt and sources
-    messages = [
-        {"role": "system", "content": "You are a helpful research assistant."},
-        {"role": "user", "content": f"Prompt: {prompt}\nSources: {sources_str}"}
-    ]
-
-    # Send the prompt and sources to the API
-    response = client.chat.completions.create(
-        model="gpt-4-1106-preview",
-        messages=messages,
-    )
-
-    return response.choices[0].message.content
+    messages = [HumanMessage(content=prompt + " " + sources_str)]
+    response = chat_model.invoke(messages)
+    parsed_response = output_parser.parse(response)
+    return parsed_response
