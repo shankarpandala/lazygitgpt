@@ -27,7 +27,7 @@ setup(
     ],
     package_dir={"": "."},  # Where to find the source code
     packages=find_packages(),
-    python_requires=">=3.6",  # Minimum version requirement of Python
+    python_requires=">=3.9",  # Minimum version requirement of Python
     install_requires=[  # List of dependencies
         "gitpython>=3.1.0",  # Example, specify actual dependencies
         "openai>=0.10.0"    # For GPT-4 integration

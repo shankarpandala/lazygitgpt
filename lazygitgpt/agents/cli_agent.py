@@ -19,10 +19,9 @@ Output the contents of the file that you changed as per the format instructions 
 """
 
 def generate_response(prompt, sources=read_repository_contents()):
-    sources_str = json.dumps(sources, indent=4)
     prompt_template = ChatPromptTemplate.from_template(template_string)
     messages = prompt_template.format_messages(user_requirements = prompt,  
-                            code_repository = sources_str,
+                            code_repository = sources,
                             format_instructions=format_instructions)
     response = chat_model(messages)
     response_json = response.to_json()
